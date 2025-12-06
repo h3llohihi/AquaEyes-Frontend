@@ -23,7 +23,6 @@ RUN bun x nuxt prepare && bun run build
 # Final runtime image
 FROM base AS release
 ENV NODE_ENV=production
-ENV NITRO_PORT=${PORT:-3000}
 ENV NITRO_HOST=0.0.0.0
 
 # Bring in production deps and built output
@@ -34,8 +33,9 @@ COPY --from=build /usr/src/app/package.json package.json
 USER bun
 EXPOSE 3000
 
-# Health check using Bun's fetch
+# Health check using Bun's fetch (uses PORT env var at runtime)
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
   CMD bun -e "const res = await fetch('http://localhost:' + (process.env.PORT || 3000) + '/'); Bun.exit(res.ok ? 0 : 1);"
 
-CMD ["bun", ".output/server/index.mjs"]
+# Use shell form to read PORT at runtime, fallback to 3000
+CMD sh -c "NITRO_PORT=\${PORT:-3000} bun .output/server/index.mjs"
