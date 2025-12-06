@@ -1,5 +1,5 @@
 # Bun multi-stage build (official pattern), adjusted for Nuxt
-FROM oven/bun:1.3.3 AS base
+FROM oven/bun:1.3.3-slim AS base
 WORKDIR /usr/src/app
 
 # Install dev dependencies (cacheable)
