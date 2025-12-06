@@ -3,6 +3,7 @@ node_modules
 .output
 .git
 .gitignore
+package-lock.json
 README.md
 .env
 .vscode

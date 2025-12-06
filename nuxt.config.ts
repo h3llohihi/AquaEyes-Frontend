@@ -5,6 +5,10 @@ export default defineNuxtConfig({
       apiBaseUrl: process.env.API_BASE_URL || "http://localhost:4558",
     },
   },
+  experimental: {
+    // Ensure #app-manifest virtual module is generated for Bun/Vite
+    appManifest: true,
+  },
   devtools: { enabled: false },
   css: ["~/assets/css/main.css"],
   plugins: ["~/plugins/apexcharts.js"],

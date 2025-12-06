@@ -73,3 +73,12 @@ bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+## Docker (Bun)
+
+Build and run with the included Bun-based Dockerfile:
+
+```bash
+docker build -t aquaeyes-bun .
+docker run -p 3000:3000 aquaeyes-bun
+```
